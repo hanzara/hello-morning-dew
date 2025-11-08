@@ -14,293 +14,882 @@ export type Database = {
   }
   public: {
     Tables: {
-      genome_dependencies: {
+      analysis_runs: {
         Row: {
+          analysis_type: string
+          completed_at: string | null
           created_at: string
-          genome_id: string | null
+          duration_seconds: number | null
           id: string
-          name: string
-          type: string | null
-          version: string | null
-        }
-        Insert: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name: string
-          type?: string | null
-          version?: string | null
-        }
-        Update: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name?: string
-          type?: string | null
-          version?: string | null
-        }
-        Relationships: []
-      }
-      genome_functions: {
-        Row: {
-          complexity: number | null
-          created_at: string
-          genome_id: string | null
-          id: string
-          name: string
-          signature: string | null
-        }
-        Insert: {
-          complexity?: number | null
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name: string
-          signature?: string | null
-        }
-        Update: {
-          complexity?: number | null
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name?: string
-          signature?: string | null
-        }
-        Relationships: []
-      }
-      genome_health: {
-        Row: {
-          created_at: string
-          genome_id: string | null
-          id: string
-          metrics: Json | null
-          score: number | null
-        }
-        Insert: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          metrics?: Json | null
-          score?: number | null
-        }
-        Update: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          metrics?: Json | null
-          score?: number | null
-        }
-        Relationships: []
-      }
-      genome_modules: {
-        Row: {
-          created_at: string
-          genome_id: string | null
-          id: string
-          name: string
-          path: string | null
-          type: string | null
-        }
-        Insert: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name: string
-          path?: string | null
-          type?: string | null
-        }
-        Update: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name?: string
-          path?: string | null
-          type?: string | null
-        }
-        Relationships: []
-      }
-      genome_packages: {
-        Row: {
-          created_at: string
-          genome_id: string | null
-          id: string
-          name: string
-          version: string | null
-        }
-        Insert: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name: string
-          version?: string | null
-        }
-        Update: {
-          created_at?: string
-          genome_id?: string | null
-          id?: string
-          name?: string
-          version?: string | null
-        }
-        Relationships: []
-      }
-      github_config: {
-        Row: {
-          base_branch: string | null
-          created_at: string
-          id: string
-          is_active: boolean | null
-          owner: string
-          repo: string
-          updated_at: string
+          repository_id: string | null
+          results: Json | null
+          status: string
           user_id: string
         }
         Insert: {
-          base_branch?: string | null
+          analysis_type: string
+          completed_at?: string | null
           created_at?: string
+          duration_seconds?: number | null
           id?: string
-          is_active?: boolean | null
-          owner: string
-          repo: string
-          updated_at?: string
+          repository_id?: string | null
+          results?: Json | null
+          status?: string
           user_id: string
         }
         Update: {
-          base_branch?: string | null
+          analysis_type?: string
+          completed_at?: string | null
           created_at?: string
+          duration_seconds?: number | null
           id?: string
-          is_active?: boolean | null
-          owner?: string
-          repo?: string
-          updated_at?: string
+          repository_id?: string | null
+          results?: Json | null
+          status?: string
           user_id?: string
         }
         Relationships: []
+      }
+      campaigns: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          goal_weights: Json | null
+          id: string
+          max_variants: number | null
+          name: string
+          progress: number | null
+          repository_id: string | null
+          status: string | null
+          updated_at: string | null
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          goal_weights?: Json | null
+          id?: string
+          max_variants?: number | null
+          name: string
+          progress?: number | null
+          repository_id?: string | null
+          status?: string | null
+          updated_at?: string | null
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          goal_weights?: Json | null
+          id?: string
+          max_variants?: number | null
+          name?: string
+          progress?: number | null
+          repository_id?: string | null
+          status?: string | null
+          updated_at?: string | null
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaigns_repository_id_fkey"
+            columns: ["repository_id"]
+            isOneToOne: false
+            referencedRelation: "repositories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      debug_sessions: {
+        Row: {
+          code: string
+          created_at: string | null
+          fixes_applied: Json | null
+          id: string
+          issues_found: Json | null
+          language: string
+          user_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          fixes_applied?: Json | null
+          id?: string
+          issues_found?: Json | null
+          language: string
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          fixes_applied?: Json | null
+          id?: string
+          issues_found?: Json | null
+          language?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      genome_analyses: {
+        Row: {
+          analysis_data: Json | null
+          created_at: string
+          efficiency_score: number | null
+          id: string
+          performance_metrics: Json | null
+          repository_id: string | null
+          security_issues: Json | null
+          user_id: string
+        }
+        Insert: {
+          analysis_data?: Json | null
+          created_at?: string
+          efficiency_score?: number | null
+          id?: string
+          performance_metrics?: Json | null
+          repository_id?: string | null
+          security_issues?: Json | null
+          user_id: string
+        }
+        Update: {
+          analysis_data?: Json | null
+          created_at?: string
+          efficiency_score?: number | null
+          id?: string
+          performance_metrics?: Json | null
+          repository_id?: string | null
+          security_issues?: Json | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "genome_analyses_repository_id_fkey"
+            columns: ["repository_id"]
+            isOneToOne: false
+            referencedRelation: "repositories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      genome_suggestions: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          genome_id: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          genome_id?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          genome_id?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "genome_suggestions_genome_id_fkey"
+            columns: ["genome_id"]
+            isOneToOne: false
+            referencedRelation: "genomes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      genomes: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          health_score: number | null
+          id: string
+          name: string
+          repository_id: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          health_score?: number | null
+          id?: string
+          name: string
+          repository_id?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          health_score?: number | null
+          id?: string
+          name?: string
+          repository_id?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "genomes_repository_id_fkey"
+            columns: ["repository_id"]
+            isOneToOne: false
+            referencedRelation: "repositories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      health_metrics: {
+        Row: {
+          complexity_score: number | null
+          created_at: string
+          files_analyzed: number | null
+          id: string
+          issues_fixed: number | null
+          issues_found: number | null
+          maintainability_score: number | null
+          overall_score: number
+          performance_score: number | null
+          repository_id: string | null
+          security_score: number | null
+          user_id: string
+        }
+        Insert: {
+          complexity_score?: number | null
+          created_at?: string
+          files_analyzed?: number | null
+          id?: string
+          issues_fixed?: number | null
+          issues_found?: number | null
+          maintainability_score?: number | null
+          overall_score: number
+          performance_score?: number | null
+          repository_id?: string | null
+          security_score?: number | null
+          user_id: string
+        }
+        Update: {
+          complexity_score?: number | null
+          created_at?: string
+          files_analyzed?: number | null
+          id?: string
+          issues_fixed?: number | null
+          issues_found?: number | null
+          maintainability_score?: number | null
+          overall_score?: number
+          performance_score?: number | null
+          repository_id?: string | null
+          security_score?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      help_requests: {
+        Row: {
+          assigned_mentor_id: string | null
+          code_snippet: string | null
+          created_at: string | null
+          description: string
+          id: string
+          language: string | null
+          specialization:
+            | Database["public"]["Enums"]["mentor_specialization"]
+            | null
+          status: Database["public"]["Enums"]["help_request_status"] | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          assigned_mentor_id?: string | null
+          code_snippet?: string | null
+          created_at?: string | null
+          description: string
+          id?: string
+          language?: string | null
+          specialization?:
+            | Database["public"]["Enums"]["mentor_specialization"]
+            | null
+          status?: Database["public"]["Enums"]["help_request_status"] | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          assigned_mentor_id?: string | null
+          code_snippet?: string | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          language?: string | null
+          specialization?:
+            | Database["public"]["Enums"]["mentor_specialization"]
+            | null
+          status?: Database["public"]["Enums"]["help_request_status"] | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "help_requests_assigned_mentor_id_fkey"
+            columns: ["assigned_mentor_id"]
+            isOneToOne: false
+            referencedRelation: "mentors"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lesson_comments: {
         Row: {
           comment: string
-          created_at: string
+          created_at: string | null
           id: string
-          lesson_id: string | null
+          lesson_id: string
           user_id: string
         }
         Insert: {
           comment: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          lesson_id?: string | null
+          lesson_id: string
           user_id: string
         }
         Update: {
           comment?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          lesson_id?: string | null
+          lesson_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_comments_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lessons: {
+        Row: {
+          code_snippet: string
+          concepts: Json | null
+          created_at: string | null
+          difficulty_level: string | null
+          duration_minutes: number | null
+          id: string
+          language: string
+          quiz_data: Json | null
+          summary: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+          xp_points: number | null
+          youtube_videos: Json | null
+        }
+        Insert: {
+          code_snippet: string
+          concepts?: Json | null
+          created_at?: string | null
+          difficulty_level?: string | null
+          duration_minutes?: number | null
+          id?: string
+          language: string
+          quiz_data?: Json | null
+          summary?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+          xp_points?: number | null
+          youtube_videos?: Json | null
+        }
+        Update: {
+          code_snippet?: string
+          concepts?: Json | null
+          created_at?: string | null
+          difficulty_level?: string | null
+          duration_minutes?: number | null
+          id?: string
+          language?: string
+          quiz_data?: Json | null
+          summary?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+          xp_points?: number | null
+          youtube_videos?: Json | null
+        }
+        Relationships: []
+      }
+      mentor_reviews: {
+        Row: {
+          comment: string | null
+          created_at: string | null
+          id: string
+          mentor_id: string
+          rating: number | null
+          session_id: string
+          user_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string | null
+          id?: string
+          mentor_id: string
+          rating?: number | null
+          session_id: string
+          user_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string | null
+          id?: string
+          mentor_id?: string
+          rating?: number | null
+          session_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentor_reviews_mentor_id_fkey"
+            columns: ["mentor_id"]
+            isOneToOne: false
+            referencedRelation: "mentors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentor_reviews_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "mentor_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentor_sessions: {
+        Row: {
+          created_at: string | null
+          duration_minutes: number | null
+          ended_at: string | null
+          help_request_id: string | null
+          id: string
+          mentor_id: string
+          started_at: string | null
+          total_cost: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          duration_minutes?: number | null
+          ended_at?: string | null
+          help_request_id?: string | null
+          id?: string
+          mentor_id: string
+          started_at?: string | null
+          total_cost?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          duration_minutes?: number | null
+          ended_at?: string | null
+          help_request_id?: string | null
+          id?: string
+          mentor_id?: string
+          started_at?: string | null
+          total_cost?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentor_sessions_help_request_id_fkey"
+            columns: ["help_request_id"]
+            isOneToOne: false
+            referencedRelation: "help_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentor_sessions_mentor_id_fkey"
+            columns: ["mentor_id"]
+            isOneToOne: false
+            referencedRelation: "mentors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentors: {
+        Row: {
+          bio: string | null
+          created_at: string | null
+          hourly_rate: number
+          id: string
+          languages_known: string[] | null
+          name: string
+          profile_image_url: string | null
+          rating: number | null
+          specialization: Database["public"]["Enums"]["mentor_specialization"]
+          total_sessions: number | null
+          updated_at: string | null
+          user_id: string | null
+          verified: boolean | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string | null
+          hourly_rate: number
+          id?: string
+          languages_known?: string[] | null
+          name: string
+          profile_image_url?: string | null
+          rating?: number | null
+          specialization: Database["public"]["Enums"]["mentor_specialization"]
+          total_sessions?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          verified?: boolean | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string | null
+          hourly_rate?: number
+          id?: string
+          languages_known?: string[] | null
+          name?: string
+          profile_image_url?: string | null
+          rating?: number | null
+          specialization?: Database["public"]["Enums"]["mentor_specialization"]
+          total_sessions?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
+      mutation_history: {
+        Row: {
+          action: string
+          created_at: string | null
+          id: string
+          mutation_id: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          id?: string
+          mutation_id?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          id?: string
+          mutation_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mutation_history_mutation_id_fkey"
+            columns: ["mutation_id"]
+            isOneToOne: false
+            referencedRelation: "mutations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mutation_tests: {
+        Row: {
+          code_after: string | null
+          code_before: string | null
+          completed_at: string | null
+          created_at: string
+          fitness_score: number | null
+          id: string
+          mutation_type: string
+          repository_id: string | null
+          status: string
+          test_results: Json | null
+          user_id: string
+        }
+        Insert: {
+          code_after?: string | null
+          code_before?: string | null
+          completed_at?: string | null
+          created_at?: string
+          fitness_score?: number | null
+          id?: string
+          mutation_type: string
+          repository_id?: string | null
+          status?: string
+          test_results?: Json | null
+          user_id: string
+        }
+        Update: {
+          code_after?: string | null
+          code_before?: string | null
+          completed_at?: string | null
+          created_at?: string
+          fitness_score?: number | null
+          id?: string
+          mutation_type?: string
+          repository_id?: string | null
+          status?: string
+          test_results?: Json | null
           user_id?: string
         }
         Relationships: []
       }
-      lessons: {
+      mutations: {
         Row: {
-          category: string | null
-          content: string | null
+          code_after: string | null
+          code_before: string | null
+          confidence_score: number | null
           created_at: string
-          description: string | null
-          difficulty: string | null
+          description: string
           id: string
-          title: string
-          updated_at: string
-          xp_points: number | null
+          improvement_metrics: Json | null
+          mutation_type: string
+          repository_id: string | null
+          status: string
+          user_id: string
         }
         Insert: {
-          category?: string | null
-          content?: string | null
+          code_after?: string | null
+          code_before?: string | null
+          confidence_score?: number | null
           created_at?: string
-          description?: string | null
-          difficulty?: string | null
+          description: string
           id?: string
-          title: string
-          updated_at?: string
-          xp_points?: number | null
+          improvement_metrics?: Json | null
+          mutation_type: string
+          repository_id?: string | null
+          status?: string
+          user_id: string
         }
         Update: {
-          category?: string | null
-          content?: string | null
+          code_after?: string | null
+          code_before?: string | null
+          confidence_score?: number | null
           created_at?: string
-          description?: string | null
-          difficulty?: string | null
+          description?: string
           id?: string
-          title?: string
-          updated_at?: string
-          xp_points?: number | null
+          improvement_metrics?: Json | null
+          mutation_type?: string
+          repository_id?: string | null
+          status?: string
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "mutations_repository_id_fkey"
+            columns: ["repository_id"]
+            isOneToOne: false
+            referencedRelation: "repositories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
-      repositories: {
+      projects: {
         Row: {
-          created_at: string
+          created_at: string | null
+          created_by: string
           description: string | null
           id: string
           name: string
-          status: string | null
+          repository_url: string | null
+          team_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by: string
+          description?: string | null
+          id?: string
+          name: string
+          repository_url?: string | null
+          team_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string
+          description?: string | null
+          id?: string
+          name?: string
+          repository_url?: string | null
+          team_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      repositories: {
+        Row: {
+          branch: string | null
+          created_at: string
+          genome_fingerprint: Json | null
+          health_score: number | null
+          id: string
+          last_analyzed_at: string | null
+          name: string
+          provider: string | null
           updated_at: string
           url: string | null
           user_id: string
         }
         Insert: {
+          branch?: string | null
           created_at?: string
-          description?: string | null
+          genome_fingerprint?: Json | null
+          health_score?: number | null
           id?: string
+          last_analyzed_at?: string | null
           name: string
-          status?: string | null
+          provider?: string | null
           updated_at?: string
           url?: string | null
           user_id: string
         }
         Update: {
+          branch?: string | null
           created_at?: string
-          description?: string | null
+          genome_fingerprint?: Json | null
+          health_score?: number | null
           id?: string
+          last_analyzed_at?: string | null
           name?: string
-          status?: string | null
+          provider?: string | null
           updated_at?: string
           url?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          id: string
+          joined_at: string | null
+          role: Database["public"]["Enums"]["team_role"] | null
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          joined_at?: string | null
+          role?: Database["public"]["Enums"]["team_role"] | null
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          joined_at?: string | null
+          role?: Database["public"]["Enums"]["team_role"] | null
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          created_at: string | null
+          created_by: string
+          description: string | null
+          id: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by: string
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
       user_progress: {
         Row: {
           completed: boolean | null
-          created_at: string
+          completed_at: string | null
+          created_at: string | null
           id: string
-          lesson_id: string | null
+          lesson_id: string
           quiz_score: number | null
-          updated_at: string
+          time_spent_minutes: number | null
           user_id: string
-          xp_points: number | null
         }
         Insert: {
           completed?: boolean | null
-          created_at?: string
+          completed_at?: string | null
+          created_at?: string | null
           id?: string
-          lesson_id?: string | null
+          lesson_id: string
           quiz_score?: number | null
-          updated_at?: string
+          time_spent_minutes?: number | null
           user_id: string
-          xp_points?: number | null
         }
         Update: {
           completed?: boolean | null
-          created_at?: string
+          completed_at?: string | null
+          created_at?: string | null
           id?: string
-          lesson_id?: string | null
+          lesson_id?: string
           quiz_score?: number | null
-          updated_at?: string
+          time_spent_minutes?: number | null
           user_id?: string
-          xp_points?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -310,7 +899,17 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      help_request_status: "open" | "in_progress" | "completed" | "cancelled"
+      mentor_specialization:
+        | "backend"
+        | "frontend"
+        | "fullstack"
+        | "ai_ml"
+        | "data_science"
+        | "cybersecurity"
+        | "mobile"
+        | "devops"
+      team_role: "admin" | "editor" | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -437,6 +1036,19 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      help_request_status: ["open", "in_progress", "completed", "cancelled"],
+      mentor_specialization: [
+        "backend",
+        "frontend",
+        "fullstack",
+        "ai_ml",
+        "data_science",
+        "cybersecurity",
+        "mobile",
+        "devops",
+      ],
+      team_role: ["admin", "editor", "viewer"],
+    },
   },
 } as const
