@@ -10,12 +10,12 @@ import { SoftwareHealingSidebar } from "@/components/SoftwareHealingSidebar";
 const SoftwareHealing = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
+      <div className="min-h-screen flex w-full bg-gradient-to-b from-background via-card/30 to-background">
         <SoftwareHealingSidebar />
         
         <div className="flex-1 flex flex-col">
           {/* Top Navigation Bar */}
-          <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+          <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border bg-[hsl(var(--nav-bg))] shadow-lg px-6">
             <SidebarTrigger />
             <div className="flex items-center gap-2">
               <Dna className="h-6 w-6 text-primary" />
