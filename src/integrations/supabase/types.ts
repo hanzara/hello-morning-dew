@@ -176,32 +176,44 @@ export type Database = {
       }
       genome_suggestions: {
         Row: {
+          confidence: number | null
           created_at: string | null
           description: string | null
           genome_id: string | null
           id: string
           priority: string | null
+          repository_id: string | null
           status: string | null
+          suggestion_type: string | null
+          template_patch: string | null
           title: string
           user_id: string
         }
         Insert: {
+          confidence?: number | null
           created_at?: string | null
           description?: string | null
           genome_id?: string | null
           id?: string
           priority?: string | null
+          repository_id?: string | null
           status?: string | null
+          suggestion_type?: string | null
+          template_patch?: string | null
           title: string
           user_id: string
         }
         Update: {
+          confidence?: number | null
           created_at?: string | null
           description?: string | null
           genome_id?: string | null
           id?: string
           priority?: string | null
+          repository_id?: string | null
           status?: string | null
+          suggestion_type?: string | null
+          template_patch?: string | null
           title?: string
           user_id?: string
         }
@@ -213,12 +225,21 @@ export type Database = {
             referencedRelation: "genomes"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "genome_suggestions_repository_id_fkey"
+            columns: ["repository_id"]
+            isOneToOne: false
+            referencedRelation: "repositories"
+            referencedColumns: ["id"]
+          },
         ]
       }
       genomes: {
         Row: {
           created_at: string | null
           description: string | null
+          efficiency_score: number | null
+          fingerprint: string | null
           health_score: number | null
           id: string
           name: string
@@ -229,6 +250,8 @@ export type Database = {
         Insert: {
           created_at?: string | null
           description?: string | null
+          efficiency_score?: number | null
+          fingerprint?: string | null
           health_score?: number | null
           id?: string
           name: string
@@ -239,6 +262,8 @@ export type Database = {
         Update: {
           created_at?: string | null
           description?: string | null
+          efficiency_score?: number | null
+          fingerprint?: string | null
           health_score?: number | null
           id?: string
           name?: string
@@ -660,8 +685,10 @@ export type Database = {
       }
       mutations: {
         Row: {
+          campaign_id: string | null
           code_after: string | null
           code_before: string | null
+          composite_score: number | null
           confidence_score: number | null
           created_at: string
           description: string
@@ -673,8 +700,10 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          campaign_id?: string | null
           code_after?: string | null
           code_before?: string | null
+          composite_score?: number | null
           confidence_score?: number | null
           created_at?: string
           description: string
@@ -686,8 +715,10 @@ export type Database = {
           user_id: string
         }
         Update: {
+          campaign_id?: string | null
           code_after?: string | null
           code_before?: string | null
+          composite_score?: number | null
           confidence_score?: number | null
           created_at?: string
           description?: string
@@ -699,6 +730,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "mutations_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "mutations_repository_id_fkey"
             columns: ["repository_id"]
