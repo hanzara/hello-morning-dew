@@ -15,6 +15,7 @@ import DNAScanner from "./pages/DNAScanner";
 import EvolutionEngine from "./pages/EvolutionEngine";
 import LiveBench from "./pages/LiveBench";
 import SmartMerge from "./pages/SmartMerge";
+import EvolutionCloud from "./pages/EvolutionCloud";
 import LessonView from "./pages/LessonView";
 import LearningLibrary from "./pages/LearningLibrary";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const AppContent = () => {
         <Route path="/software-healing/evolution" element={<EvolutionEngine />} />
         <Route path="/software-healing/livebench" element={<LiveBench />} />
         <Route path="/software-healing/smartmerge" element={<SmartMerge />} />
+        <Route path="/software-healing/cloud" element={<EvolutionCloud />} />
         <Route path="/lesson/:id" element={<LessonView />} />
         <Route path="/learning-library" element={<LearningLibrary />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

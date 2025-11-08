@@ -32,6 +32,7 @@ const menuItems = [
   { title: "Evolution Engine", url: "/software-healing/evolution", icon: TrendingUp },
   { title: "LiveBench 📊", url: "/software-healing/livebench", icon: BarChart3 },
   { title: "SmartMerge 🤖", url: "/software-healing/smartmerge", icon: GitMerge },
+  { title: "Evolution Cloud ☁️", url: "/software-healing/cloud", icon: Activity },
   { title: "Monitoring", url: "/software-healing/monitoring", icon: Activity },
   { title: "Code Analysis", url: "/software-healing/analysis", icon: FileCode },
   { title: "Security", url: "/software-healing/security", icon: Shield },
